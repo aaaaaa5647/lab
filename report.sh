@@ -2,13 +2,13 @@
 
 LOCK_FILE="report.lock"
 REPORT_FILE="report.txt"
-cleanup_interrupt()
+cleanup()
 {
     echo "Прервано" >&2
     rm -f "$LOCK_FILE" "$REPORT_FILE"
     exit 1
 }
-trap cleanup_interrupt SIGINT SIGTERM
+trap cleanup SIGINT SIGTERM
 
 if [ "$1" == "--help" ]; then
     echo "  -p, --players <file>      players log"
@@ -40,7 +40,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [ ! -f "$PLAYERS_F" ] || [ ! -f "$BANLIST_F" ] || [ ! -f "$TRANS_F" ]; then
-    echo "Error: Missing or invalid log files." >&2
+    echo "Ошибка" >&2
     rm -f "$LOCK_FILE"
     exit 1
 fi

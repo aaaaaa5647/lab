@@ -4,7 +4,7 @@ format()
 {
     local file="$1"
     [ ! -f "$file" ] && return 1
-    sed '^/11_Steve_11 /d' "$file" | sort -u > "${file}.tmp" && mv "${file}.tmp" "$file"
+    sed '/^11_Steve_11 /d' "$file" | sort -u > "${file}.tmp" && mv "${file}.tmp" "$file"
 }
 add() 
 {
@@ -56,7 +56,7 @@ case "$1" in
     remove)
         remove "$2" ;;
     sort)
-        sort_list "$2" "$3" ;;
+        sort2 "$2" "$3" ;;
     *)
         echo "Ошибка" >&2
         exit 1  ;;
