@@ -41,7 +41,7 @@ sort2()
     if [ "$type" == "--name" ]; then
         sort -k1,1 "$file"
     elif [ "$type" == "--time" ]; then
-        sort -k2,2 "$file"
+        sort -t ':' -k3,3n -k2,2n -k1,1n "$file"
     fi
 }
 
